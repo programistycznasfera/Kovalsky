@@ -4,8 +4,15 @@ import platform
 import os
 import shutil
 import colorama
+import random
+import time as t
+from win11toast import *
 from colorama import *
+import webbrowser
+from datetime import *
 os.system('cls')
+def put_procedure(text,time_variable):
+    print(Fore.LIGHTMAGENTA_EX + "[" + Fore.LIGHTGREEN_EX + f"{time_variable}" + Fore.LIGHTMAGENTA_EX + "]" + " " + Fore.WHITE + text)
 def get_ip_address():
     # Pobierz adres IP
     hostname = socket.gethostname()
@@ -30,6 +37,7 @@ def get_system_info():
         "Processor": platform.processor(),
         "Architecture": platform.architecture()
     }
+    
     return system_info
 
 def get_memory_info():
@@ -63,7 +71,7 @@ if __name__ == "__main__":
     system_info = get_system_info()
     memory_info = get_memory_info()
     disk_info = get_disk_info()
-    print(Fore.YELLOW + """
+    print(Fore.GREEN + """
  /$$   /$$                                   /$$           /$$                
 | $$  /$$/                                  | $$          | $$                
 | $$ /$$/   /$$$$$$  /$$  /$$  /$$  /$$$$$$ | $$  /$$$$$$$| $$   /$$ /$$   /$$
@@ -75,10 +83,11 @@ if __name__ == "__main__":
                                                                      /$$  | $$
                                                                     |  $$$$$$/
                                                                      \______/ 
-                                1.0 TESTING
+                                1.1
 """)
     while True:
-        response = input("<")
+        times = datetime.now()
+        response = input(Fore.YELLOW + "<")
         if response == 'get_*':
             print("==========================")
             print(f"MAC address: {mac_address}")
@@ -105,5 +114,18 @@ if __name__ == "__main__":
                 print(f"Device: {device}")
                 for key, value in info.items():
                     print(f"  {key}: {value / (1024 ** 3):.2f} GB" if key in ["Total Size", "Used", "Free"] else f"  {key}: {value}")
-        else:
-            print('Command not found')
+        elif response == "put *string* type=log":
+            text = input("Enter a text to print: ")
+            put_procedure(text,times)
+        elif response == "condome":
+            put_procedure("Condome is a kovalsky inplementation to tests :-)",times)
+        elif response == "condome opened_browser":
+            responser = webbrowser.BackgroundBrowser
+            t.sleep(1)
+            put_procedure("Thinking.",times)
+            t.sleep(1)
+            put_procedure("Thinking..",times)
+            t.sleep(1)
+            put_procedure("Thinking...",times)
+            t.sleep(1)
+            put_procedure(f"Your opened browser is {responser}",times)
